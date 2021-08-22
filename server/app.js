@@ -5,11 +5,6 @@ const mongoose = require("mongoose");
 
 const app = express();
 
-// mongoose.connect(
-//   "mongodb+srv://charles:Bs75KuXJ8OAMAwpv@graphql.aphfz.mongodb.net/graphql?retryWrites=true&w=majority",
-//   { useNewUrlParser: true }
-// );
-
 mongoose.connect(
   "mongodb+srv://charles:Bs75KuXJ8OAMAwpv@graphql.aphfz.mongodb.net/graphql?retryWrites=true&w=majority",
   { useNewUrlParser: true, useUnifiedTopology: true }
