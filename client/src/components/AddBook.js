@@ -1,20 +1,24 @@
-import { useQuery } from "@apollo/client";
-import { AUTHORS } from "../queries/queries";
+import { useQuery, useMutation } from "@apollo/client";
+import { AUTHORS, ADD_BOOK } from "../queries/queries";
 import { useState } from "react";
 
 export const AddBook = (props) => {
   const { loading, error, data } = useQuery(AUTHORS);
+  const [saveBook] = useMutation(ADD_BOOK);
   const [book, setBook] = useState({ name: "", genre: "", authorId: "" });
-  const { name, genre } = book;
+  const { name, genre, authorId } = book;
 
   const onChangeHandler = ({ target }) => {
     const { id, value } = target;
     setBook({ ...book, [id]: value });
   };
 
-  const onSubmitForm = (event) => {
+  const onSubmitForm = async (event) => {
     event.preventDefault();
     console.log(book);
+    if (!name || !genre || !authorId) return false;
+    const { data } = await saveBook({ variables: book });
+    console.log(data);
   };
 
   if (loading) return <div>Loading Authors...</div>;
