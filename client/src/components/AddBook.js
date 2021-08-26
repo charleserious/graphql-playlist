@@ -1,11 +1,13 @@
 import { useQuery, useMutation } from "@apollo/client";
-import { AUTHORS, ADD_BOOK } from "../queries/queries";
+import { AUTHORS, BOOKS, ADD_BOOK } from "../queries/queries";
 import { useState } from "react";
+
+const INITIAL_BOOK = { name: "", genre: "", authorId: "" };
 
 export const AddBook = (props) => {
   const { loading, error, data } = useQuery(AUTHORS);
   const [saveBook] = useMutation(ADD_BOOK);
-  const [book, setBook] = useState({ name: "", genre: "", authorId: "" });
+  const [book, setBook] = useState(INITIAL_BOOK);
   const { name, genre, authorId } = book;
 
   const onChangeHandler = ({ target }) => {
@@ -15,9 +17,12 @@ export const AddBook = (props) => {
 
   const onSubmitForm = async (event) => {
     event.preventDefault();
-    console.log(book);
     if (!name || !genre || !authorId) return false;
-    const { data } = await saveBook({ variables: book });
+    const { data } = await saveBook({
+      variables: book,
+      refetchQueries: [{ query: BOOKS }],
+    });
+    setBook(INITIAL_BOOK);
     console.log(data);
   };
 
