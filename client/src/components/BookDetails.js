@@ -18,7 +18,7 @@ export const BookDetails = ({ bookId }) => {
     },
   } = data;
   return (
-    <div id="book-detail">
+    <div id="book-details">
       <h2>{name}</h2>
       <p>{genre}</p>
       <p>{authorName}</p>
