@@ -1,5 +1,6 @@
 import { useQuery } from "@apollo/client";
 import { BOOKS } from "../queries/queries";
+import { BookDetails } from "./BookDetails";
 
 export const BookList = (props) => {
   const { loading, error, data } = useQuery(BOOKS);
@@ -14,6 +15,7 @@ export const BookList = (props) => {
           <li key={id}>{name}</li>
         ))}
       </ul>
+      <BookDetails></BookDetails>
     </div>
   );
 };

@@ -28,7 +28,6 @@ export const AddBook = (props) => {
 
   if (loading) return <div>Loading Authors...</div>;
   if (error) return <div>Error :(</div>;
-
   return (
     <form id="add-book" onSubmit={onSubmitForm}>
       <div className="field">
